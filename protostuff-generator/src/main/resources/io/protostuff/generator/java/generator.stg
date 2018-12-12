@@ -1,5 +1,5 @@
 delimiters "<", ">"
 
 generator_annotation(type) ::= <<
-@javax.annotation.Generated("<type.proto.showFilename>")
+@javax.annotation.Generated("<type.proto.filename>")
 >>

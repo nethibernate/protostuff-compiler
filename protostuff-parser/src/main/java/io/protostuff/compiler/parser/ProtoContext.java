@@ -42,7 +42,6 @@ public class ProtoContext {
         proto = new Proto();
         proto.setContext(this);
         proto.setFilename(filename);
-        proto.setShowFilename(filename);
         proto.setName(getFilenameWithoutExtension(filename));
         push(proto);
         extensionRegistry = new ProtoExtensionRegistry(this);
