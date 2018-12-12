@@ -2,6 +2,7 @@ package io.protostuff.compiler.model;
 
 import com.google.common.base.MoreObjects;
 import io.protostuff.compiler.parser.ProtoContext;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ public class Proto extends AbstractUserTypeContainer implements UserTypeContaine
     protected Module module;
     protected ProtoContext context;
     protected String filename;
+    protected String showFilename;
     protected Syntax syntax = Syntax.DEFAULT;
     protected Package pkg = Package.DEFAULT;
     protected List<Import> imports = new ArrayList<>();
@@ -48,6 +50,14 @@ public class Proto extends AbstractUserTypeContainer implements UserTypeContaine
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public void setShowFilename(String filename) {
+        this.showFilename = filename.replace("\\", "\\\\");
+    }
+
+    public String getShowFilename() {
+        return showFilename;
     }
 
     public Syntax getSyntax() {
@@ -135,4 +145,5 @@ public class Proto extends AbstractUserTypeContainer implements UserTypeContaine
     public void setModule(Module module) {
         this.module = module;
     }
+
 }

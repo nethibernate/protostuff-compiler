@@ -18,8 +18,6 @@ public class EnumUtil {
      * Returns constant name for java enum.
      */
     public static String getName(EnumConstant constant) {
-        String name = constant.getName();
-        String underscored = Formatter.toUnderscoreCase(name);
-        return Formatter.toUpperCase(underscored);
+        return constant.getName();
     }
 }
