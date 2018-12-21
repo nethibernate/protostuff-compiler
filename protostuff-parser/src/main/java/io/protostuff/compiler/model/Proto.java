@@ -16,6 +16,7 @@ public class Proto extends AbstractUserTypeContainer implements UserTypeContaine
     protected Module module;
     protected ProtoContext context;
     protected String filename;
+    protected String showname;
     protected Syntax syntax = Syntax.DEFAULT;
     protected Package pkg = Package.DEFAULT;
     protected List<Import> imports = new ArrayList<>();
@@ -49,7 +50,15 @@ public class Proto extends AbstractUserTypeContainer implements UserTypeContaine
     public void setFilename(String filename) {
         this.filename = filename;
     }
-
+    
+    public String getShowname() {
+        return showname;
+    }
+    
+    public void setShowname(String showname) {
+        this.showname = showname;
+    }
+    
     public Syntax getSyntax() {
         return syntax;
     }
