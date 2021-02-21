@@ -20,6 +20,8 @@ public <if(message.nested)>static <endif>final class <message.javaName>
 
     private static final <message.javaName> DEFAULT_INSTANCE = newBuilder().build();
 
+    <if(message.message)><if(!message.mapEntry)><message.options:message_options(); separator="\n"><endif><endif>
+
     <message.fields:field_declaration(); separator="\n">
     private boolean __merge_lock = false;
     <message.javaBitFieldNames:message_bit_field(); separator="\n">
@@ -79,6 +81,10 @@ implements io.protostuff.Message\<<message.javaName>>
 
 message_bit_field(name) ::= <<
 private int <name>;
+>>
+
+message_options(options) ::= <<
+<options>
 >>
 
 field_accessors(field) ::= <<

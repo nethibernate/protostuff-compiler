@@ -34,6 +34,7 @@ public class JavaExtensionProvider extends AbstractExtensionProvider {
         registerProperty(Message.class, "javaFullName", UserTypeUtil::getCanonicalName);
         registerProperty(Message.class, "hasFields", MessageUtil::hasFields);
         registerProperty(Message.class, "javaBitFieldNames", MessageUtil::bitFieldNames);
+        registerProperty(Message.class, "options", MessageUtil::getOptions);
 
         registerProperty(Field.class, "javaType", MessageFieldUtil::getFieldType);
         registerProperty(Field.class, "javaRepeatedType", MessageFieldUtil::getRepeatedFieldType);

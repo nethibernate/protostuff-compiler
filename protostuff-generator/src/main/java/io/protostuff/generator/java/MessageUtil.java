@@ -1,11 +1,15 @@
 package io.protostuff.generator.java;
 
+import io.protostuff.compiler.model.DynamicMessage;
+import io.protostuff.compiler.model.Field;
 import io.protostuff.compiler.model.Message;
 import io.protostuff.compiler.model.Oneof;
+import io.protostuff.compiler.parser.ExtensionRegistry;
 import io.protostuff.generator.Formatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Custom message properties for java code generator.
@@ -34,6 +38,35 @@ public class MessageUtil {
         int n = (fieldCount - 1) / 32 + 1;
         for (int i = 0; i < n; i++) {
             result.add("__bitField" + i);
+        }
+        return result;
+    }
+
+    /**
+     * ssss.
+     */
+    public static List<String> getOptions(Message message) {
+        List<String> result = new ArrayList<>();
+        ExtensionRegistry extension = message.getProto().getContext().getExtensionRegistry();
+        Map<String, Field> extensionFields = extension.getExtensionFields(".google.protobuf.MessageOptions");
+        DynamicMessage options = message.getOptions();
+        for (Map.Entry<DynamicMessage.Key, DynamicMessage.Value> each : options.getFields()) {
+            if (!each.getKey().isExtension()) {
+                continue;
+            }
+            String name = each.getKey().getName();
+            Field field = extensionFields.get("." + name);
+            String fieldType = MessageFieldUtil.getFieldType(field);
+            String s = "public static final " + fieldType + " " + MessageFieldUtil.getFieldName(field) + " = ";
+            if (each.getValue().isEnumType()) {
+                s += fieldType + "." + each.getValue();
+            } else if (each.getValue().isMessageType()) {
+                throw new IllegalStateException("Custom Options cannot support message type now!");
+            } else {
+                s += each.getKey().getName();
+            }
+            s += ";";
+            result.add(s);
         }
         return result;
     }
