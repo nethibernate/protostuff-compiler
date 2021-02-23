@@ -34,7 +34,7 @@ public class JavaExtensionProvider extends AbstractExtensionProvider {
         registerProperty(Message.class, "javaFullName", UserTypeUtil::getCanonicalName);
         registerProperty(Message.class, "hasFields", MessageUtil::hasFields);
         registerProperty(Message.class, "javaBitFieldNames", MessageUtil::bitFieldNames);
-        registerProperty(Message.class, "options", MessageUtil::getOptions);
+        registerProperty(Message.class, "options", MessageUtil::getMessageOptions);
 
         registerProperty(Field.class, "javaType", MessageFieldUtil::getFieldType);
         registerProperty(Field.class, "javaRepeatedType", MessageFieldUtil::getRepeatedFieldType);
@@ -97,6 +97,8 @@ public class JavaExtensionProvider extends AbstractExtensionProvider {
 
         registerProperty(Enum.class, JAVA_NAME, UserTypeUtil::getClassName);
         registerProperty(Enum.class, "javaFullName", UserTypeUtil::getCanonicalName);
+        registerProperty(Enum.class, "enumValueOptions", EnumUtil::getEnumValueOptions);
+        registerProperty(Enum.class, "staticInitEnumValueOptions", EnumUtil::getStaticInitEnumValueOptions);
 
         registerProperty(EnumConstant.class, JAVA_NAME, EnumUtil::getName);
 

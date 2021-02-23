@@ -6,6 +6,7 @@ import io.protostuff.compiler.model.Message;
 import io.protostuff.compiler.model.Oneof;
 import io.protostuff.compiler.parser.ExtensionRegistry;
 import io.protostuff.generator.Formatter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,9 +44,9 @@ public class MessageUtil {
     }
 
     /**
-     * ssss.
+     * Return message options.
      */
-    public static List<String> getOptions(Message message) {
+    public static List<String> getMessageOptions(Message message) {
         List<String> result = new ArrayList<>();
         ExtensionRegistry extension = message.getProto().getContext().getExtensionRegistry();
         Map<String, Field> extensionFields = extension.getExtensionFields(".google.protobuf.MessageOptions");

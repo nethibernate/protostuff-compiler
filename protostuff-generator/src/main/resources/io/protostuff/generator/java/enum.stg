@@ -15,6 +15,9 @@ public enum <enum.javaName> implements io.protostuff.EnumLite\<<enum.javaName>\>
     <enum.constants:enum_constant(); separator=",\n"><if(first(enum.constants))>,<endif>
     UNRECOGNIZED(-1);
 
+    <enum.staticInitEnumValueOptions>
+
+    <enum.enumValueOptions:enum_value_options(); separator="\n">
     private final int value;
 
     private <enum.javaName>(int n) {
@@ -37,6 +40,10 @@ public enum <enum.javaName> implements io.protostuff.EnumLite\<<enum.javaName>\>
         }
     }
 }
+>>
+
+enum_value_options(option) ::= <<
+<option>
 >>
 
 enum_constant(constant) ::= <<
