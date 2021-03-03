@@ -94,6 +94,7 @@ public class EnumUtil {
                 }
                 sb.append("\t").append(constant.getName()).append(".").append(fieldName).append(" = ").append(each.getValue().toString()).append(";\n");
             }
+            set.clear();
         }
         if (sb.length() > 0) {
             sb.append("}");
