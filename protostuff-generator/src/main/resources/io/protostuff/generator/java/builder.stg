@@ -20,6 +20,11 @@ public static final class Builder <message:message_builder_implements_clause()> 
 
     <message.fields:builder_field_accessors(); separator="\n">
 
+    public Builder clearAll(){
+        <message.fields:clear_all(); separator="\n">
+        return this;
+    }
+
     <message.oneofs:oneof_case(); separator="\n">
 
     <message.oneofs:oneof_cleaner(); separator="\n">
@@ -88,6 +93,10 @@ builder_factory_method(message) ::= <<
 public static Builder newBuilder() {
     return new Builder();
 }
+>>
+
+clear_all(field) ::= <<
+<if(!field.oneofPart)>this.<field.javaCleanerName>();<endif>
 >>
 
 builder_field_accessors(field) ::= <<
