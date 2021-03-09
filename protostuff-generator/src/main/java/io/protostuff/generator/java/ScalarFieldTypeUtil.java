@@ -19,7 +19,7 @@ public class ScalarFieldTypeUtil {
     private static final String JAVA_LANG_DOUBLE = "Double";
     private static final String JAVA_LANG_BOOLEAN = "Boolean";
     private static final String JAVA_LANG_STRING = "String";
-    private static final String PROTOSTUFF_BYTE_STRING = "io.protostuff.ByteString";
+    private static final String PROTOSTUFF_BYTE_STRING = "byte[]";
 
     private static final String PRIMITIVE_INT = "int";
     private static final String PRIMITIVE_LONG = "long";
@@ -33,7 +33,7 @@ public class ScalarFieldTypeUtil {
     private static final String DEFAULT_VALUE_DOUBLE = "0d";
     private static final String DEFAULT_VALUE_BOOLEAN = "false";
     private static final String DEFAULT_VALUE_STRING = "\"\"";
-    private static final String DEFAULT_VALUE_BYTE_STRING = "io.protostuff.ByteString.EMPTY";
+    private static final String DEFAULT_VALUE_BYTE_STRING = "io.protostuff.ByteString.EMPTY_BYTE_ARRAY";
 
     private static final Map<ScalarFieldType, String> WRAPPER_TYPE =
             new EnumMap<>(ImmutableMap.<ScalarFieldType, String>builder()

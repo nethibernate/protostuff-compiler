@@ -36,7 +36,7 @@ public class ScalarTest {
         assertEquals(0L, msg.getSignedFixed64());
         assertEquals(false, msg.getBool());
         assertEquals("", msg.getString());
-        assertEquals(0, msg.getBytes().size());
+        assertEquals(0, msg.getBytes().length);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ScalarTest {
                 .setSignedFixed64(12L)
                 .setBool(true)
                 .setString("string")
-                .setBytes(ByteString.copyFrom(new byte[]{1, 2, 3}))
+                .setBytes(new byte[]{1, 2, 3})
                 .build();
         assertEquals(0.1d, msg.getDouble(), 0.000001d);
         assertEquals(0.2f, msg.getFloat(), 0.000001f);
@@ -72,7 +72,9 @@ public class ScalarTest {
         assertEquals(12L, msg.getSignedFixed64());
         assertEquals(true, msg.getBool());
         assertEquals("string", msg.getString());
-        assertEquals(ByteString.copyFrom(new byte[]{1, 2, 3}), msg.getBytes());
+        for (byte i = 1; i <= 3; i++) {
+            assertEquals(i, msg.getBytes()[i - 1]);
+        }
     }
 
     @Test

@@ -56,7 +56,7 @@ public class MessageFieldUtil {
                     .put(ScalarFieldType.DOUBLE, "Double")
                     .put(ScalarFieldType.BOOL, "Bool")
                     .put(ScalarFieldType.STRING, "String")
-                    .put(ScalarFieldType.BYTES, "Bytes")
+                    .put(ScalarFieldType.BYTES, "ByteArray")
                     .build());
 
     private MessageFieldUtil() {
