@@ -8,6 +8,7 @@ import io.protostuff.compiler.model.ModuleConfiguration;
 import io.protostuff.generator.ProtostuffCompiler;
 import java.io.File;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -33,12 +34,15 @@ public class JavaGeneratorMojo extends AbstractGeneratorMojo {
         super.execute();
 
         ProtostuffCompiler compiler = new ProtostuffCompiler();
-        final Path sourcePath = getSourcePath();
+        List<String> protoFiles = new ArrayList<>();
         String output = computeSourceOutputDir(target);
-        List<String> protoFiles = findProtoFiles(sourcePath);
+        List<Path> sourcePathList = getSourcePath();
+        for (Path sourcePath : sourcePathList) {
+            protoFiles.addAll(findProtoFiles(sourcePath));
+        }
         ModuleConfiguration moduleConfiguration = ImmutableModuleConfiguration.builder()
                 .name("java")
-                .includePaths(singletonList(sourcePath))
+                .includePaths(sourcePathList)
                 .generator("java")
                 .output(output)
                 .protoFiles(protoFiles)

@@ -48,11 +48,15 @@ public abstract class AbstractGeneratorMojo extends AbstractMojo {
     @Parameter(defaultValue = "${mojoExecution}", readonly = true)
     private MojoExecution execution;
     @Parameter
-    private File source;
+    private List<File> sources;
 
-    Path getSourcePath() {
-        if (source != null) {
-            return source.toPath();
+    List<Path> getSourcePath() {
+        if (sources != null) {
+            ArrayList<Path> paths = new ArrayList<>(sources.size());
+            for (File source : sources) {
+                paths.add(source.toPath());
+            }
+            return paths;
         }
         String phase = execution.getLifecyclePhase();
         String basedir;
@@ -63,7 +67,7 @@ public abstract class AbstractGeneratorMojo extends AbstractMojo {
         } else {
             sourcePath = basedir + "/src/main/proto/";
         }
-        return Paths.get(sourcePath);
+        return List.of(Paths.get(sourcePath));
     }
 
     private String getCanonicalPath(File file) {

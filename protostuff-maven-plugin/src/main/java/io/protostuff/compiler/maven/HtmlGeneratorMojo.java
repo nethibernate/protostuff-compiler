@@ -39,11 +39,14 @@ public class HtmlGeneratorMojo extends AbstractGeneratorMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         super.execute();
         ProtostuffCompiler compiler = new ProtostuffCompiler();
-        final Path sourcePath = getSourcePath();
-        List<String> protoFiles = findProtoFiles(sourcePath);
+        List<String> protoFiles = new ArrayList<>();
+        List<Path> sourcePathList = getSourcePath();
+        for (Path sourcePath : sourcePathList) {
+            protoFiles.addAll(findProtoFiles(sourcePath));
+        }
         ModuleConfiguration moduleConfiguration = ImmutableModuleConfiguration.builder()
                 .name("html")
-                .includePaths(singletonList(sourcePath))
+                .includePaths(sourcePathList)
                 .generator(CompilerModule.HTML_COMPILER)
                 .output(target.getAbsolutePath())
                 .putOptions(HtmlGenerator.PAGES, pages)

@@ -9,6 +9,7 @@ import io.protostuff.generator.CompilerModule;
 import io.protostuff.generator.ProtostuffCompiler;
 import java.io.File;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,20 +45,23 @@ public class St4GeneratorMojo extends AbstractGeneratorMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         super.execute();
 
-        ProtostuffCompiler compiler = new ProtostuffCompiler();
-        final Path sourcePath = getSourcePath();
-        String output = computeSourceOutputDir(target);
-        Set<String> allTemplates = new LinkedHashSet<>();
+        final ProtostuffCompiler compiler = new ProtostuffCompiler();
+        final String output = computeSourceOutputDir(target);
+        final Set<String> allTemplates = new LinkedHashSet<>();
         if (template != null) {
             allTemplates.add(template);
         }
         if (templates != null) {
             allTemplates.addAll(templates);
         }
-        List<String> protoFiles = findProtoFiles(sourcePath);
+        final List<String> protoFiles = new ArrayList<>();
+        final List<Path> sourcePathList = getSourcePath();
+        for (Path sourcePath : sourcePathList) {
+            protoFiles.addAll(findProtoFiles(sourcePath));
+        }
         ModuleConfiguration moduleConfiguration = ImmutableModuleConfiguration.builder()
                 .name("java")
-                .includePaths(singletonList(sourcePath))
+                .includePaths(sourcePathList)
                 .generator(CompilerModule.ST4_COMPILER)
                 .putOptions(CompilerModule.TEMPLATES_OPTION, allTemplates)
                 .putOptions(CompilerModule.EXTENSIONS_OPTION, extensions)
