@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 public class TypeLinkTest {
 
-    @Test
     void wikiStyleLinkIsConvertedToUrl() {
         MessageDescriptor service = HtmlGeneratorUtil.read(MessageDescriptor.class, "html/data/type/io.protostuff.it.TypeLinkTestMessage.json");
         MessageDescriptor expected = ImmutableMessageDescriptor.builder()
