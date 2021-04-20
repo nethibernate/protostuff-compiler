@@ -100,6 +100,15 @@ if(!((instance.<field.javaBitFieldName> & <field.javaBitFieldMask>) == <field.ja
     instance.<field.javaName> = new java.util.ArrayList\<>();
 <endif>
     instance.<field.javaBitFieldName> |= <field.javaBitFieldMask>;
+<if(!field.map)>
+<if(field.repeated)>
+<if(field.javaCanBePackedType)>
+    if(input.isPacked()){
+        if(input.setPackedAndGetLength() == 0) break;
+    }
+<endif>
+<endif>
+<endif>
 }
 >>
 

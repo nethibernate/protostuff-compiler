@@ -78,6 +78,7 @@ public class JavaExtensionProvider extends AbstractExtensionProvider {
         registerProperty(Field.class, "javaBuilderRepeatedSetterName", MessageFieldUtil::getRepeatedBuilderSetterName);
         registerProperty(Field.class, "javaDefaultValue", MessageFieldUtil::getDefaultValue);
         registerProperty(Field.class, "javaIsNumericType", MessageFieldUtil::isNumericType);
+        registerProperty(Field.class, "javaCanBePackedType", MessageFieldUtil::canBePackedType);
         registerProperty(Field.class, "javaIsBooleanType", MessageFieldUtil::isBooleanType);
         registerProperty(Field.class, "javaIsScalarNullableType", MessageFieldUtil::isScalarNullableType);
         registerProperty(Field.class, "protostuffReadMethod", MessageFieldUtil::protostuffReadMethod);

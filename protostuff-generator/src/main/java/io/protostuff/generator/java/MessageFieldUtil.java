@@ -524,6 +524,15 @@ public class MessageFieldUtil {
         boolean scalar = type instanceof ScalarFieldType;
         return scalar && !(BOOL.equals(type) || STRING.equals(type) || BYTES.equals(type));
     }
+    
+    /**
+     * Check if field type is can be packed.
+     */
+    public static boolean canBePackedType(Field field) {
+        FieldType type = field.getType();
+        boolean scalar = type instanceof ScalarFieldType;
+        return scalar && !(STRING.equals(type) || BYTES.equals(type));
+    }
 
     public static boolean isBooleanType(Field field) {
         return BOOL.equals(field.getType());
